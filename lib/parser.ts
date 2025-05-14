@@ -1,3 +1,5 @@
+import { IsNumber, IsOptional, IsRepeatable } from "./meta";
+
 // const VALID_PARAM_RE = /[a-zA-Z0-9_]/; // vue-router@4.5.1/dist/vue-router.mjs::1244
 type AllowedParamCharsTuple = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 
@@ -34,4 +36,12 @@ export type GetCleanedParamName<
 
 export type RemapDitryParams<Params extends string[]> = {
   [K in Params[number] as GetCleanedParamName<K>]: K
+}
+
+export type RemapParamsWithTypesDetection<T extends Record<string,string>> = {
+  [K in keyof T & string]: {
+    number: IsNumber<`:${K}`, `:${T[K]}`> // looks strange, but it totaly guarantees right start of string
+    optional: IsOptional<`:${K}`, `:${T[K]}`>,
+    repeatable: IsRepeatable<`:${K}`, `:${T[K]}`>
+  }
 }

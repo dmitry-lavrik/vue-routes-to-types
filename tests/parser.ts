@@ -1,5 +1,5 @@
 import type { IsNumber, IsOptional } from '../lib/meta'
-import { InferDirtyParams, RemapDitryParams } from '../lib/parser';
+import { InferDirtyParams, RemapDitryParams, RemapParamsWithTypesDetection } from '../lib/parser';
 
 type PathsToCheck = {
   'empty': '/home',
@@ -46,4 +46,33 @@ type a = RemapDitryParams<['id/theme/', 'theme']>
   'repNum2': { parts: 'parts(\\d)*' },
   'opt': { id: 'id/', sub: 'sub?' },
   'crazy': { theme: 'theme/pref-', id: 'id(\\d)-', wtf: 'wtf-suff/', any: 'any*' }
+}; }
+
+// Record<CleanedParams, RemapedParam>
+{ const _: {
+  [K in keyof PathsToCheck]: RemapParamsWithTypesDetection<RemapDitryParams<
+    InferDirtyParams<PathsToCheck[K]>
+  >>
+} = {
+  'empty': {},
+  'simple': { id: { number: false, optional: false, repeatable: false } },
+  'double': { 
+    id: { number: false, optional: false, repeatable: false }, 
+    theme: { number: false, optional: false, repeatable: false }
+  },
+  'number': { id: { number: true, optional: false, repeatable: false } },
+  'repeatable1': { parts: { number: false, optional: false, repeatable: true } },
+  'repeatable2': { parts: { number: false, optional: true, repeatable: true } },
+  'repNum1': { parts: { number: true, optional: false, repeatable: true } },
+  'repNum2': { parts: { number: true, optional: true, repeatable: true } },
+  'opt': { 
+    id: { number: false, optional: false, repeatable: false } , 
+    sub: { number: false, optional: true, repeatable: false } 
+  },
+  'crazy': { 
+    theme: { number: false, optional: false, repeatable: false } , 
+    id: { number: true, optional: false, repeatable: false } , 
+    wtf: { number: false, optional: false, repeatable: false } , 
+    any: { number: false, optional: true, repeatable: true } 
+  }
 }; }
