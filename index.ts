@@ -5,5 +5,6 @@
 */
 
 import type { GenerateRoutesMap } from "./lib/combine";
+import type { NamedRouteRecordRaw } from "./lib/types";
 
-export default GenerateRoutesMap;
+export type { GenerateRoutesMap, NamedRouteRecordRaw };
