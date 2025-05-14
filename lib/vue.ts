@@ -16,5 +16,5 @@ type InferParamType<T extends RemapedParam> =
       todo: vue-router useRoute().params can return epmty string instead of array, 
         when params market as "/:parts*" and empty
     */
-    ? T['number'] extends true ? number[] : string[] 
+    ? T['number'] extends true ? number[] : string[] //todo: + must be parsed as [T,...T] that means not empty array
     : T['number'] extends true ? number : string

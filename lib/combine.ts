@@ -1,0 +1,26 @@
+import { RouteRecordInfo } from "vue-router";
+import { GenerateRoutesDraft } from "./draft";
+import { NamedRouteRecordRaw } from "./types";
+import { AllParamsToString, GetByDotKey, KeysAndChidlren, TakeNames } from "./utility";
+
+export type GenerateRoutesMap<
+  Routes extends NamedRouteRecordRaw[]
+> = CombineFromDraft<GenerateRoutesDraft<Routes>>
+
+type CombineFromDraft<
+  Draft extends GenerateRoutesDraft<any>,
+  DraftKeys extends string = KeysAndChidlren<Draft>
+> = CombineToVue<{
+  [K in DraftKeys]: GetByDotKey<Draft,K>
+}>
+
+//todo: maybe remove any. It works well now, but any is bad
+type CombineToVue<FlattenDraft extends Record<string,any>> = {
+  [K in keyof FlattenDraft as FlattenDraft[K]['name']]: RouteRecordInfo<
+    FlattenDraft[K]['name'],
+    FlattenDraft[K]['path'],
+    FlattenDraft[K]['params'],
+    AllParamsToString<FlattenDraft[K]['params']>,
+    TakeNames<FlattenDraft[K]['children']>
+  >
+}
