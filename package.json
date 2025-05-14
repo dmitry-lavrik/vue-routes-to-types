@@ -1,0 +1,23 @@
+{
+  "name": "vue-routes-to-types",
+  "version": "0.0.1",
+  "description": "Library for creating typescript types based on routes of vue router routes.",
+  "homepage": "https://github.com/dmitry-lavrik/vue-routes-to-types#readme",
+  "bugs": {
+    "url": "https://github.com/dmitry-lavrik/vue-routes-to-types/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmitry-lavrik/vue-routes-to-types.git"
+  },
+  "license": "MIT",
+  "author": "Dmitry Lavrik",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "vue-router": "^4.5.1"
+  }
+}
