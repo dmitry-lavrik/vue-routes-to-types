@@ -6,6 +6,8 @@ export type RemapedParam = {
   number: boolean
 }
 
+export type VueRouteParams = Record<string, number | string | number[] | string[]>
+
 type OmitKeys = 'props' | 'children' | 'redirect';
 
 /*
