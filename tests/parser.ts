@@ -1,5 +1,6 @@
 import type { IsNumber, IsOptional } from '../lib/meta'
 import { InferDirtyParams, RemapDitryParams, RemapParamsWithTypesDetection } from '../lib/parser';
+import { RemapParamsToVue } from '../lib/vue';
 
 type PathsToCheck = {
   'empty': '/home',
@@ -74,5 +75,27 @@ type a = RemapDitryParams<['id/theme/', 'theme']>
     id: { number: true, optional: false, repeatable: false } , 
     wtf: { number: false, optional: false, repeatable: false } , 
     any: { number: false, optional: true, repeatable: true } 
+  }
+}; }
+
+// Vue remaped
+{ const _: {
+  [K in keyof PathsToCheck]: RemapParamsToVue<RemapParamsWithTypesDetection<RemapDitryParams<
+    InferDirtyParams<PathsToCheck[K]>
+  >>>
+} = {
+  'empty': {},
+  'simple': { id: '-' },
+  'double': { id: '-', theme: '-' },
+  'number': { id: 1 },
+  'repeatable1': { parts: ['1', '2'] },
+  'repeatable2': {}, // because optional
+  'repNum1': { parts: [1, 2] },
+  'repNum2': {}, // because optional
+  'opt': {  id: '' },
+  'crazy': { 
+    theme: '-', 
+    id: 1 , 
+    wtf: '-'
   }
 }; }
