@@ -35,7 +35,7 @@ const routes = [
 export type RoutesMap = GenerateRoutesMap<typeof routes>; 
 ```
 
-## And finally send in to some.d.ts file
+## And finally send it to some.d.ts file
 ```ts
 declare module 'vue-router' {
   interface TypesConfig {
