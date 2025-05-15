@@ -11,6 +11,9 @@ import type { IsNumber, IsOptional, IsRepeatable } from './../lib/meta'
 { const _: IsNumber<':name', ':name(\\d)+-tail'> = true; }
 { const _: IsNumber<':name', ':name(\\d)*-tail'> = true; }
 { const _: IsNumber<':name', ':name(\\d)?-tail'> = true; }
+{ const _: IsNumber<':name', ':name(\\d+)'> = true; }
+{ const _: IsNumber<':name', ':name(\\d*)'> = true; }
+{ const _: IsNumber<':name', ':name(\\d+)?-tail'> = true; }
 
 // strings
 { const _: IsNumber<':name', ':name'> = false; }

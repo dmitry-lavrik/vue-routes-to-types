@@ -108,14 +108,14 @@ It is RouteRecordRaw from vue-router with small modifications.
 2. Correctly parse dynamic params
 3. Supports children routes
 4. Correctly joins parent and children dynamic params
-5. Try to detect number regexp by \d 
+5. Try to detect popular number regexps
 6. Detects optional params 
 7. Detects repeatable params
 8. Creates great tuple type if repeatable params is required: [T,...T[]] instead of T[] 
 
 ## Library limitations
 
-1. Of course we can`t really analize RegExp in () of dynamic param. We just try to detect \d, no more than that.
+1. Of course we can`t really analize RegExp in () of dynamic param. We just try to detect \\\d or \\\d+ or \\\d*, no more than that.
 2. You can`t use typed routing into routes array. As sample, when you define redirect field system does not know about types yet.
 3. ```<RouterLink :to="{ name: 'some '}">``` does not show error even if params is required. It is bad and it is question for vue-router team. They marked params as optional for all cases.
 

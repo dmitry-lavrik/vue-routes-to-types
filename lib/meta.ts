@@ -6,9 +6,13 @@ export type IsNumber<
   DirtyParam extends string
 > = 
 DirtyParam extends `${Name}(${infer RegExp})${infer _}` 
-  ? RegExp extends `${infer _}\d${infer _}`
+  ? RegExp extends `\\d`
     ? true
-    : false 
+    : RegExp extends `\\d+`
+      ? true
+      : RegExp extends `\\d*` //todo: not sure, mb it is not number
+        ? true 
+        : false
   : false
 
 /*
