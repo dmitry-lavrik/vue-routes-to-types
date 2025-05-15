@@ -1,5 +1,9 @@
 type PlainObj = Record<string,unknown>
 
+/* 
+  It uses when we join tree to flatten keys and then split it.
+  Logical Dot is "." But then this symbol cannot be used in the route name. 
+*/
 type Dot = '..-..'
 
 export type KeysAndChidlren<Obj extends PlainObj, K = keyof Obj> = 
