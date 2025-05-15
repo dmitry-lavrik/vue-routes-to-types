@@ -123,8 +123,8 @@ It is RouteRecordRaw from vue-router with small modifications.
 
 If you know typescript just open tests folder and learns files in right order:
 
-1. parser
-2. meta
+1. meta
+2. parser
 3. draft
 4. combine
 
