@@ -88,8 +88,8 @@ type a = RemapDitryParams<['id/theme/', 'theme']>
   'simple': { id: '-' },
   'double': { id: '-', theme: '-' },
   'number': { id: 1 },
-  'repeatable1': { parts: ['1', '2'] },
-  'repeatable2': {}, // because optional
+  'repeatable1': { parts: ['1', '2'] }, // {} or {parts:[]} show error, because +
+  'repeatable2': { parts: [] }, // {} also good, because optional with *
   'repNum1': { parts: [1, 2] },
   'repNum2': {}, // because optional
   'opt': {  id: '' },

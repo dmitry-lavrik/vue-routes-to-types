@@ -14,7 +14,10 @@ type InferParamType<T extends RemapedParam> =
   T['repeatable'] extends true
     /* 
       todo: vue-router useRoute().params can return epmty string instead of array, 
-        when params market as "/:parts*" and empty
+        when params marked as "/:parts*" and empty
     */
-    ? T['number'] extends true ? number[] : string[] //todo: + must be parsed as [T,...T] that means not empty array
+    ? T['optional'] extends true 
+      ? T['number'] extends true ? number[] : string[]
+      // Now we make tuple that has length >= 1 because param is required
+      : T['number'] extends true ? [number, ...number[]] : [string, ...string[]]
     : T['number'] extends true ? number : string
