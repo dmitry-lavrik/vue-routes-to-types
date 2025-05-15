@@ -24,6 +24,8 @@ import type { IsNumber, IsOptional, IsRepeatable } from './../lib/meta'
 { const _: IsNumber<':name', ':name+-tail'> = false; }
 { const _: IsNumber<':name', ':name*-tail'> = false; }
 { const _: IsNumber<':name', ':name?-tail'> = false; }
+{ const _: IsNumber<':name', ':name(\\d{2})'> = false; } // can not detect it like number
+{ const _: IsNumber<':name', ':name(\\d+-\d)-tail'> = false; }
 
 // optional
 { const _: IsOptional<':name', ':name?'> = true; }
