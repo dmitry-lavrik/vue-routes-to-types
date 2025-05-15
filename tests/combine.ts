@@ -18,7 +18,7 @@ type RightLeftEquals<T,K> = T extends K
       component
     },
     {
-      path: '/item/:id',
+      path: '/item/:id(\\d)',
       name: 'item',
       component,
       children: [
@@ -63,8 +63,8 @@ type RightLeftEquals<T,K> = T extends K
     RoutesMap['item'],
     RouteRecordInfo<
       'item',
-      '/item/:id',
-      { id: string },
+      '/item/:id(\\d)',
+      { id: number },
       { id: string },
       'item-default' | 'item-some'
     >
@@ -74,11 +74,12 @@ type RightLeftEquals<T,K> = T extends K
     RoutesMap['item-some-more'],
     RouteRecordInfo<
       'item-some-more',
-      '/item/:id/theme/:some/and/:onemore(\\d)+',
-      { id: string, some: string, onemore: number[] },
-      { id: string, some: string, onemore: string[] },
+      '/item/:id(\\d)/theme/:some/and/:onemore(\\d)+',
+      { id: number, some: string, onemore: [number,...number[]] },
+      { id: string, some: string, onemore: string[] }, // not tuple, string[] because it is just expected result of useRoute().params 
       never
     >
   > = true }
+
 }
 

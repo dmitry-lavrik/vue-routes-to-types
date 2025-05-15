@@ -71,7 +71,7 @@ import { GetByDotKey, KeysAndChidlren } from "../lib/utility";
             'item-some-more': {
               name: 'item-some-more',
               path: '/item/:id/theme/:some/and/:onemore(\\d)+',
-              params: { id: '-', some: '23', onemore: [ ] },
+              params: { id: '-', some: '23', onemore: [ 1 ] },
               children: null
             }
           }
