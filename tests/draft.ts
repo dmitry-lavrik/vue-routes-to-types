@@ -90,16 +90,16 @@ import type { GetByDotKey, KeysAndChidlren } from "../lib/utility";
   const __: KeysAndChidlren<typeof _>[] = [
     'home',
     'item',
-    'item.children.item-default',
-    'item.children.item-some',
-    'item.children.item-some.children.item-some-more',
+    'item..-..children..-..item-default',
+    'item..-..children..-..item-some',
+    'item..-..children..-..item-some..-..children..-..item-some-more',
     'long'
   ];
 
   /* Test get by dot key */
   const ___: GetByDotKey<
     typeof _,
-    'item.children.item-default'
+    'item..-..children..-..item-default'
   > = {
     name: 'item-default',
     path: '/item/:id',

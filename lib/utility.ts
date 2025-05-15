@@ -1,18 +1,20 @@
 type PlainObj = Record<string,unknown>
 
+type Dot = '..-..'
+
 export type KeysAndChidlren<Obj extends PlainObj, K = keyof Obj> = 
   K extends keyof Obj
     ? K extends string
       ? Obj[K] extends { children: PlainObj }
         ? Obj[K] extends { children: never }
           ? K
-          : K | `${K}.children.${KeysAndChidlren<Obj[K]['children']>}`
+          : K | `${K}${Dot}children${Dot}${KeysAndChidlren<Obj[K]['children']>}`
         : K
       : never
     : never
 
 export type GetByDotKey<T extends PlainObj, K extends string> = 
-  K extends `${infer R1}.${infer R2}`
+  K extends `${infer R1}${Dot}${infer R2}`
     ? R1 extends keyof T
       ? T[R1] extends PlainObj
         ? GetByDotKey<T[R1], R2>
