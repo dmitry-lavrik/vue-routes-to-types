@@ -24,7 +24,7 @@ interface TypesConfig {
 It is very good, but... Some text from official documentaion:
 
 > Here is an example of how to manually configure typed routes:
-...
+  ... 
 > TIP. This is indeed tedious and error-prone.
 
 And it's true. Writing bulky types that duplicate your routes array is very tedious. Just look on it:
@@ -104,16 +104,20 @@ It is RouteRecordRaw from vue-router with small modifications.
 
 ## Library capabilities
 
-1. Supports children routes
+1. Automaticly generates RouteRecordInfo for each NamedRouteRecordRaw
 2. Correctly parse dynamic params
-3. Correctly joins parent and children dynamic params
-4. Detect repeatable params
-5. Detect optional params 
-6. Try to detect number regexp by \d 
+3. Supports children routes
+4. Correctly joins parent and children dynamic params
+5. Try to detect number regexp by \d 
+6. Detects optional params 
+7. Detects repeatable params
+8. Creates great tuple type if repeatable params is required: [T,...T[]] instead of T[] 
 
 ## Library limitations
 
 1. Of course we can`t really analize RegExp in () of dynamic param. We just try to detect \d, no more than that.
+2. You can`t use typed routing into routes array. As sample, when you define redirect field system does not know about types yet.
+3. <RouterLink :to="{ name: 'some '}"> does not show error even if params is required. It is bad and it is question for vue-router team. They marked params as optional for all cases.
 
 ## How to understand libruary magic
 
