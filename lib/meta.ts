@@ -1,5 +1,6 @@
 /*
   Return true if param has RegExp that contains \d
+  todo: provide custom user login to detect number regexps
 */
 export type IsNumber<
   Name extends string, 
