@@ -1,6 +1,6 @@
-import { InferDirtyParams, RemapDitryParams, RemapParamsWithTypesDetection } from "./parser"
-import { NamedRouteRecordRaw, VueRouteParams } from "./types"
-import { RemapParamsToVue } from "./vue"
+import type { InferDirtyParams, RemapDitryParams, RemapParamsWithTypesDetection } from "./parser"
+import type { NamedRouteRecordRaw, VueRouteParams } from "./types"
+import type { RemapParamsToVue } from "./vue"
 
 type RemapFullSteps<Path extends string> = RemapParamsToVue<
   RemapParamsWithTypesDetection<

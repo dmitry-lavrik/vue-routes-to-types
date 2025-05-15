@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsRepeatable } from "./meta";
+import type { IsNumber, IsOptional, IsRepeatable } from "./meta";
 
 // const VALID_PARAM_RE = /[a-zA-Z0-9_]/; // vue-router@4.5.1/dist/vue-router.mjs::1244
 type AllowedParamCharsTuple = [

@@ -1,6 +1,6 @@
-import { GenerateRoutesDraft } from "../lib/draft";
-import { NamedRouteRecordRaw } from "../lib/types";
-import { GetByDotKey, KeysAndChidlren } from "../lib/utility";
+import type { GenerateRoutesDraft } from "../lib/draft";
+import type { NamedRouteRecordRaw } from "../lib/types";
+import type { GetByDotKey, KeysAndChidlren } from "../lib/utility";
 
 {
   const component = () => {} // always fake component

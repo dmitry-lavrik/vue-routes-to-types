@@ -1,6 +1,5 @@
-import type { IsNumber, IsOptional } from '../lib/meta'
-import { InferDirtyParams, RemapDitryParams, RemapParamsWithTypesDetection } from '../lib/parser';
-import { RemapParamsToVue } from '../lib/vue';
+import type { InferDirtyParams, RemapDitryParams, RemapParamsWithTypesDetection } from '../lib/parser';
+import type { RemapParamsToVue } from '../lib/vue';
 
 type PathsToCheck = {
   'empty': '/home',

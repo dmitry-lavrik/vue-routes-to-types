@@ -1,7 +1,7 @@
-import { RouteRecordInfo } from "vue-router";
-import { GenerateRoutesDraft } from "./draft";
-import { NamedRouteRecordRaw } from "./types";
-import { AllParamsToString, GetByDotKey, KeysAndChidlren, TakeNames } from "./utility";
+import type { RouteRecordInfo } from "vue-router";
+import type { GenerateRoutesDraft } from "./draft";
+import type { NamedRouteRecordRaw } from "./types";
+import type { AllParamsToString, GetByDotKey, KeysAndChidlren, TakeNames } from "./utility";
 
 export type GenerateRoutesMap<
   Routes extends NamedRouteRecordRaw[]

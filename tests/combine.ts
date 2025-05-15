@@ -1,6 +1,6 @@
-import { RouteRecordInfo } from "vue-router";
-import { GenerateRoutesMap } from "../lib/combine";
-import { NamedRouteRecordRaw } from "../lib/types";
+import type { RouteRecordInfo } from "vue-router";
+import type { GenerateRoutesMap } from "../lib/combine";
+import type { NamedRouteRecordRaw } from "../lib/types";
 
 type RightLeftEquals<T,K> = T extends K 
   ? K extends T 

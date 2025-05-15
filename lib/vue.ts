@@ -1,4 +1,4 @@
-import { RemapedParam } from "./types"
+import type { RemapedParam } from "./types"
 
 export type RemapParamsToVue<Params extends Record<string, RemapedParam>> = 
   // Build required params

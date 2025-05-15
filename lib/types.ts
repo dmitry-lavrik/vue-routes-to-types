@@ -1,4 +1,4 @@
-import { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric, RouteLocationGeneric, RouteLocationNormalizedGeneric, RouteRecordMultipleViews, RouteRecordMultipleViewsWithChildren, RouteRecordRedirect, RouteRecordSingleView, RouteRecordSingleViewWithChildren } from "vue-router";
+import type { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric, RouteLocationGeneric, RouteLocationNormalizedGeneric, RouteRecordMultipleViews, RouteRecordMultipleViewsWithChildren, RouteRecordRedirect, RouteRecordSingleView, RouteRecordSingleViewWithChildren } from "vue-router";
 
 export type RemapedParam = {
   repeatable: boolean,
