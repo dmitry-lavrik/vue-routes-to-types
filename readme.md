@@ -11,7 +11,7 @@ More detailed sample located below on this page.
 
 ##  What is problem of vue router which we decide?
 
-Of course since v4.4.0+ Vue Router can work with typed routes. Link to official documentaion - <https://router.vuejs.org/guide/advanced/typed-routes.html>
+Of course since v4.4.0+ Vue Router can work with typed routes. Link to official documentation - <https://router.vuejs.org/guide/advanced/typed-routes.html>
 
 We can define RouteNamedMap map and extends interface TypesConfig.
 
@@ -21,7 +21,7 @@ interface TypesConfig {
 }
 ```
 
-It is very good, but... Some text from official documentaion:
+It is very good, but... Some text from official documentation:
 
 > Here is an example of how to manually configure typed routes:
   ... 
@@ -119,7 +119,7 @@ It is RouteRecordRaw from vue-router with small modifications.
 2. You can`t use typed routing into routes array. As sample, when you define redirect field system does not know about types yet.
 3. ```<RouterLink :to="{ name: 'some '}">``` does not show error even if params is required. It is bad and it is question for vue-router team. They marked params as optional for all cases.
 
-## How to understand libruary magic
+## How to understand library magic
 
 If you know typescript just open tests folder and learns files in right order:
 
