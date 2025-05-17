@@ -108,8 +108,8 @@ It is RouteRecordRaw from vue-router with small modifications.
 2. Correctly parse dynamic params
 3. Supports children routes
 4. Correctly joins parent and children dynamic params
-5. Try to detect popular number regexps
-6. Allows you to set up custom number regexps detection logic
+5. Trys to detect popular number patterns
+6. Allows you to set up custom number detection logic
 7. Detects optional params 
 8. Detects repeatable params
 9. Creates great tuple type if repeatable params is required: [T,...T[]] instead of T[] 
@@ -134,7 +134,7 @@ export type RoutesMap = GenerateRoutesMap<
   ['\\d', '\\d+', '\\d{4}']
 >; 
 ```
-Now url like '/archive/:year(\\d{4})' infer rawParams = { year: number }
+Now url like '/archive/:year(\\\d{4})' infer rawParams = { year: number }
 
 ## Why for :name(\\\d)* useRoute().params.name give string | string[]
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-routes-to-types",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Library for creating typescript types based on routes of vue router routes.",
   "homepage": "https://github.com/dmitry-lavrik/vue-routes-to-types#readme",
   "bugs": {
