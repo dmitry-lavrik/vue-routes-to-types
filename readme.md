@@ -109,15 +109,31 @@ It is RouteRecordRaw from vue-router with small modifications.
 3. Supports children routes
 4. Correctly joins parent and children dynamic params
 5. Try to detect popular number regexps
-6. Detects optional params 
-7. Detects repeatable params
-8. Creates great tuple type if repeatable params is required: [T,...T[]] instead of T[] 
+6. Allows you to set up custom number regexps detection logic
+7. Detects optional params 
+8. Detects repeatable params
+9. Creates great tuple type if repeatable params is required: [T,...T[]] instead of T[] 
 
 ## Library limitations
 
-1. Of course we can`t really analize RegExp in () of dynamic param. We just try to detect \\\d or \\\d+ or \\\d*, no more than that.
+1. Of course we can`t really analize RegExp in () of dynamic param. We just try to detect \\\d or \\\d+. But your can provide custom number detectors.
 2. You can`t use typed routing into routes array. As sample, when you define redirect field system does not know about types yet.
 3. ```<RouterLink :to="{ name: 'some '}">``` does not show error even if params is required. It is bad and it is question for vue-router team. They marked params as optional for all cases.
+
+## Number detectors 
+
+By default we try to detected numbers based on 
+```ts
+export type DefaultNumberDetectors = ['\\d', '\\d+']
+```
+Your can provide custom number detectors as the second param of GenerateRoutesMap
+```ts
+export type RoutesMap = GenerateRoutesMap<
+  typeof routes,
+  ['\\d', '\\d+', '\\d{4}']
+>; 
+```
+Now url like '/archive/:year(\\d{4})' infer rawParams = { year: number }
 
 ## How to understand library magic
 
@@ -127,5 +143,6 @@ If you know typescript just open tests folder and learns files in right order:
 2. parser
 3. draft
 4. combine
+5. custom-number-detectors
 
 ### Enjoy using it!
