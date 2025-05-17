@@ -1,5 +1,7 @@
 import type { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric, RouteLocationGeneric, RouteLocationNormalizedGeneric, RouteRecordMultipleViews, RouteRecordMultipleViewsWithChildren, RouteRecordRedirect, RouteRecordSingleView, RouteRecordSingleViewWithChildren } from "vue-router";
 
+export type DefaultNumberDetectors = ['\\d', '\\d+']
+
 export type RemapedParam = {
   repeatable: boolean,
   optional: boolean,

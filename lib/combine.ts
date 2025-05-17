@@ -1,11 +1,12 @@
 import type { RouteRecordInfo } from "vue-router";
 import type { GenerateRoutesDraft } from "./draft";
-import type { NamedRouteRecordRaw } from "./types";
+import type { DefaultNumberDetectors, NamedRouteRecordRaw } from "./types";
 import type { AllParamsToString, GetByDotKey, KeysAndChidlren, TakeNames } from "./utility";
 
 export type GenerateRoutesMap<
-  Routes extends NamedRouteRecordRaw[]
-> = CombineFromDraft<GenerateRoutesDraft<Routes>>
+  Routes extends NamedRouteRecordRaw[],
+  NumberDetectors extends string[] = DefaultNumberDetectors
+> = CombineFromDraft<GenerateRoutesDraft<Routes, NumberDetectors>>
 
 type CombineFromDraft<
   Draft extends GenerateRoutesDraft<any>,

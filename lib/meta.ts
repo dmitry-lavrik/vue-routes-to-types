@@ -1,20 +1,25 @@
+import type { DefaultNumberDetectors } from "./types"
+
 /*
-  Return true if param has RegExp that contains \d
-  todo: provide custom user login to detect number regexps
+  Return true if param has RegExp that contains at least on of NumberDetectors
 */
 export type IsNumber<
   Name extends string, 
-  DirtyParam extends string
+  DirtyParam extends string,
+  NumberDetectors extends string [] = DefaultNumberDetectors
 > = 
 DirtyParam extends `${Name}(${infer RegExp})${infer _}` 
-  ? RegExp extends `\\d`
-    ? true
-    : RegExp extends `\\d+`
-      ? true
-      : RegExp extends `\\d*` //todo: not sure, mb it is not number
-        ? true 
-        : false
+  ? NextNumberDetector<RegExp, NumberDetectors>
   : false
+
+type NextNumberDetector<RegExp extends string, NumberDetectors extends string[]> = 
+  NumberDetectors extends [infer CurrentDetector, ...infer RestDetectors]
+    ? RegExp extends CurrentDetector
+      ? true
+      : RestDetectors extends string []
+        ? NextNumberDetector<RegExp, RestDetectors>
+        : false
+    : false
 
 /*
   Return true if param marked as optinal with ? or *

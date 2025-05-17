@@ -1,4 +1,5 @@
 import type { IsNumber, IsOptional, IsRepeatable } from "./meta";
+import type { DefaultNumberDetectors } from "./types";
 
 // const VALID_PARAM_RE = /[a-zA-Z0-9_]/; // vue-router@4.5.1/dist/vue-router.mjs::1244
 type AllowedParamCharsTuple = [
@@ -38,9 +39,12 @@ export type RemapDitryParams<Params extends string[]> = {
   [K in Params[number] as GetCleanedParamName<K>]: K
 }
 
-export type RemapParamsWithTypesDetection<T extends Record<string,string>> = {
+export type RemapParamsWithTypesDetection<
+  T extends Record<string,string>,
+  NumberDetectors extends string[] = DefaultNumberDetectors
+> = {
   [K in keyof T & string]: {
-    number: IsNumber<`:${K}`, `:${T[K]}`> // looks strange, but it totaly guarantees right start of string
+    number: IsNumber<`:${K}`, `:${T[K]}`, NumberDetectors> // looks strange, but it totaly guarantees right start of string
     optional: IsOptional<`:${K}`, `:${T[K]}`>,
     repeatable: IsRepeatable<`:${K}`, `:${T[K]}`>
   }

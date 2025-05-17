@@ -1,14 +1,18 @@
 import type { InferDirtyParams, RemapDitryParams, RemapParamsWithTypesDetection } from "./parser"
-import type { NamedRouteRecordRaw, VueRouteParams } from "./types"
+import type { DefaultNumberDetectors, NamedRouteRecordRaw, VueRouteParams } from "./types"
 import type { RemapParamsToVue } from "./vue"
 
-type RemapFullSteps<Path extends string> = RemapParamsToVue<
+type RemapFullSteps<
+  Path extends string,
+  NumberDetectors extends string[] = DefaultNumberDetectors
+> = RemapParamsToVue<
   RemapParamsWithTypesDetection<
     RemapDitryParams<
       InferDirtyParams<
         Path
       >
-    >
+    >,
+    NumberDetectors
   >
 >
 
@@ -23,16 +27,21 @@ type JoinPaths<Parent extends string, Current extends string> =
 
 export type GenerateRoutesDraft<
   Routes extends NamedRouteRecordRaw[],
+  NumberDetectors extends string [] = DefaultNumberDetectors,
   PathFromParent extends string = '',
   ParamsFromParent extends VueRouteParams = {}
 > = {
   [K in Routes[number] as K['name']]: {
     name: K['name'],
     path: JoinPaths<PathFromParent, K['path']>,
-    params: RemapFullSteps<JoinPaths<PathFromParent, K['path']>> & ParamsFromParent,
+    params: RemapFullSteps<
+      JoinPaths<PathFromParent, K['path']>,
+      NumberDetectors
+    > & ParamsFromParent,
     children: K extends { children: NamedRouteRecordRaw[] } 
       ? GenerateRoutesDraft<
           K['children'],
+          NumberDetectors,
           JoinPaths<PathFromParent, K['path']>,
           RemapFullSteps<
             JoinPaths<PathFromParent, K['path']>
