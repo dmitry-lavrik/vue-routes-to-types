@@ -12,10 +12,6 @@ export type RemapParamsToVue<Params extends Record<string, RemapedParam>> =
 
 type InferParamType<T extends RemapedParam> = 
   T['repeatable'] extends true
-    /* 
-      todo: vue-router useRoute().params can return epmty string instead of array, 
-        when params marked as "/:parts*" and empty
-    */
     ? T['optional'] extends true 
       ? T['number'] extends true ? number[] : string[]
       // Now we make tuple that has length >= 1 because param is required
