@@ -119,6 +119,7 @@ It is RouteRecordRaw from vue-router with small modifications.
 1. Of course we can`t really analize RegExp in () of dynamic param. We just try to detect \\\d or \\\d+. But your can provide custom number detectors.
 2. You can`t use typed routing into routes array. As sample, when you define redirect field system does not know about types yet.
 3. ```<RouterLink :to="{ name: 'some '}">``` does not show error even if params is required. It is bad and it is question for vue-router team. They marked params as optional for all cases.
+4. If you like very illogical patterns like /compare/:parts(\\d*)+ libruary can`t help.
 
 ## Number detectors 
 
