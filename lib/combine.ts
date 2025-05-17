@@ -21,7 +21,7 @@ type CombineToVue<FlattenDraft extends Record<string,any>> = {
     FlattenDraft[K]['name'],
     FlattenDraft[K]['path'],
     FlattenDraft[K]['params'],
-    AllParamsToString<FlattenDraft[K]['params']>,
+    AllParamsToString<Required<FlattenDraft[K]['params']>>,
     TakeNames<FlattenDraft[K]['children']>
   >
 }

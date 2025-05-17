@@ -42,7 +42,7 @@ type RightLeftEquals<T,K> = T extends K
       ]
     },
     {
-      path: '/long/:parts(\\d)+',
+      path: '/long/:parts(\\d)*',
       name: 'long',
       component
     }
@@ -81,5 +81,17 @@ type RightLeftEquals<T,K> = T extends K
     >
   > = true }
 
+  { const _: RightLeftEquals<
+    RoutesMap['long'],
+    RouteRecordInfo<
+      'long',
+      '/long/:parts(\\d)*',
+      { parts?: number[] | undefined },
+      { parts: string | string[] }, // why string??? because useRoute().params.parts = '' if params not provided
+      never
+    >
+  > = true }
+
+  type a = RoutesMap['long']['params']
 }
 

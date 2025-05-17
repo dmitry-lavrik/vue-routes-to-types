@@ -30,6 +30,14 @@ export type GetByDotKey<T extends PlainObj, K extends string> =
 
 export type TakeNames<T> = T extends Record<string,{ name: string }> ? T[keyof T]['name'] : never
 
-export type AllParamsToString<T extends Record<string,unknown>> = {
-  [K in keyof T]: T[K] extends Array<any> ? string[] : string
+export type AllParamsToString<
+  T extends Record<string,unknown>
+  > = 
+{
+  [K in keyof T]: 
+    T[K] extends Array<any> 
+      ? T[K] extends [infer _, ...infer __] 
+        ? string[]  
+        : string[] | string
+      : string
 }
