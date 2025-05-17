@@ -135,6 +135,15 @@ export type RoutesMap = GenerateRoutesMap<
 ```
 Now url like '/archive/:year(\\d{4})' infer rawParams = { year: number }
 
+## Why for :name(\\\d)* useRoute().params.name give string | string[]
+
+For this sample real rawParams is good = [number, ...number[]]. 
+
+But result of vue-router useRoute() is... strange... If repeateable param with * is not provided, useRoute return empty string, not empty array.
+
+That is, here our library simply adapts to the logic of vue-router.
+
+
 ## How to understand library magic
 
 If you know typescript just open tests folder and learns files in right order:
