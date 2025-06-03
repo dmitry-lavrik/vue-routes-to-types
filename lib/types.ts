@@ -16,16 +16,32 @@ type OmitKeys = 'props' | 'children' | 'redirect';
   We need simplify Vue Router types to prevent circulary errors
 */
 type RouteRecordRedirectOptionSimplified = string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric
+type RouteRecordRedirectOptionSimplifiedUnion = 
+  RouteRecordRedirectOptionSimplified | 
+   // care with RouteLocationGeneric, may be it can create circular deps
+  ((to: RouteLocationGeneric) => RouteRecordRedirectOptionSimplified)
 
 export type NamedRouteRecordRaw = (
-  Omit<RouteRecordSingleView, OmitKeys> & { redirect?: never } | 
-  Omit<RouteRecordSingleViewWithChildren, OmitKeys> & { redirect?: never, children: NamedRouteRecordRaw[] } | 
-  Omit<RouteRecordMultipleViews, OmitKeys> & { redirect?: never } | 
-  Omit<RouteRecordMultipleViewsWithChildren, OmitKeys> & { redirect?: never, children: NamedRouteRecordRaw[] } | 
+  Omit<RouteRecordSingleView, OmitKeys> & { 
+    redirect?: never 
+  } |
+
+  Omit<RouteRecordSingleViewWithChildren, OmitKeys> & { 
+    redirect?: RouteRecordRedirectOptionSimplifiedUnion, 
+    children: NamedRouteRecordRaw[] 
+  } | 
+
+  Omit<RouteRecordMultipleViews, OmitKeys> & { 
+    redirect?: never 
+  } | 
+
+  Omit<RouteRecordMultipleViewsWithChildren, OmitKeys> & { 
+    redirect?: RouteRecordRedirectOptionSimplifiedUnion, 
+    children: NamedRouteRecordRaw[] 
+  } | 
+
   Omit<RouteRecordRedirect, OmitKeys> & { 
-    redirect: RouteRecordRedirectOptionSimplified | 
-              ((to: RouteLocationGeneric) => RouteRecordRedirectOptionSimplified)
-              // care with RouteLocationGeneric, may be it can create circular deps
+    redirect: RouteRecordRedirectOptionSimplifiedUnion
   }
 ) & { 
   name: string,
