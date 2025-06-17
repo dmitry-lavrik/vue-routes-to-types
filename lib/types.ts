@@ -1,4 +1,4 @@
-import type { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric, RouteLocationGeneric, RouteLocationNormalizedGeneric, RouteRecordMultipleViews, RouteRecordMultipleViewsWithChildren, RouteRecordRedirect, RouteRecordSingleView, RouteRecordSingleViewWithChildren } from "vue-router";
+import type { _Awaitable, NavigationGuardNext, RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric, RouteLocationGeneric, RouteLocationNormalizedGeneric, RouteLocationNormalizedLoadedGeneric, RouteRecordMultipleViews, RouteRecordMultipleViewsWithChildren, RouteRecordRedirect, RouteRecordSingleView, RouteRecordSingleViewWithChildren } from "vue-router";
 
 export type DefaultNumberDetectors = ['\\d', '\\d+']
 
@@ -10,12 +10,22 @@ export type RemapedParam = {
 
 export type VueRouteParams = Record<string, number | string | number[] | string[]>
 
-type OmitKeys = 'props' | 'children' | 'redirect';
+type OmitKeys = 'props' | 'children' | 'redirect' | 'beforeEnter';
 
 /*
   We need simplify Vue Router types to prevent circulary errors
 */
 type RouteRecordRedirectOptionSimplified = string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric
+
+type NavigationGuardWithThisSimplified<T> = {
+  (
+    this: T, 
+    to: RouteLocationNormalizedGeneric, 
+    rom: RouteLocationNormalizedLoadedGeneric, 
+    next: NavigationGuardNext
+  ): _Awaitable<void | Error | boolean | RouteRecordRedirectOptionSimplified>;
+}
+
 type RouteRecordRedirectOptionSimplifiedUnion = 
   RouteRecordRedirectOptionSimplified | 
    // care with RouteLocationGeneric, may be it can create circular deps
@@ -45,6 +55,7 @@ export type NamedRouteRecordRaw = (
   }
 ) & { 
   name: string,
+  beforeEnter?: NavigationGuardWithThisSimplified<undefined> | NavigationGuardWithThisSimplified<undefined>[]
   props?: boolean | Record<string,boolean> | ((to: RouteLocationNormalizedGeneric) => Record<string,boolean>)
   // care with RouteLocationNormalizedGeneric, may be it can create circular deps
 };
